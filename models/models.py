@@ -15,21 +15,18 @@ class NNModel(nn.Module):
         for layer in self.linear_layers:
             layer.weight.data *= weight_scaling
 
-        # Model 
+        # Model
         self.eval()
 
-    
     def forward(self, x):
         for layer in self.linear_layers:
             x = self.relu(layer(x))
         return self.softmax(x)
 
-
     @property
     def weight(self):
         return [layer.weight.data for layer in self.linear_layers]
 
-    
     @weight.setter
     def weight(self, w):
         for i, layer in enumerate(self.linear_layers):

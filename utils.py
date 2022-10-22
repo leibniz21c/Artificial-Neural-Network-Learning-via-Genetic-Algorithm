@@ -13,7 +13,7 @@ def get_stream_logger(filename):
     logger.setLevel(logging.INFO)
 
     # Formatter
-    formatter = logging.Formatter('[%(asctime)s - %(levelname)s] : %(message)s')
+    formatter = logging.Formatter("[%(asctime)s - %(levelname)s] : %(message)s")
 
     # handler
     file_handler = logging.FileHandler(filename)
@@ -26,14 +26,16 @@ def get_stream_logger(filename):
 @torch.no_grad()
 def simulation(models, generation=None, n_valid=5, logger=None):
     num_models = len(models)
-    envs = [gym.make('CartPole-v1') for i in range(num_models)]
+    envs = [gym.make("CartPole-v1") for i in range(num_models)]
 
     # Reset environments
-    observations = torch.cat([torch.FloatTensor(env.reset()).unsqueeze(dim=0) for env in envs], dim=0)
+    observations = torch.cat(
+        [torch.FloatTensor(env.reset()).unsqueeze(dim=0) for env in envs], dim=0
+    )
     dones = torch.tensor([False for i in range(num_models)])
-    
+
     # Cv
-    fitnesses = [torch.tensor([0. for i in range(num_models)]) for i in range(n_valid)]
+    fitnesses = [torch.tensor([0.0 for i in range(num_models)]) for i in range(n_valid)]
 
     for k in range(n_valid):
         while not dones.all():
@@ -48,31 +50,35 @@ def simulation(models, generation=None, n_valid=5, logger=None):
     fitnesses = fitnesses.mean(dim=0)
 
     if logger is not None:
-        logger.info(f"Generation {generation:7} : max fitness = {max(fitnesses):6.2f}, mean fitness = {fitnesses.mean().item():6.2f}")
-    
+        logger.info(
+            f"Generation {generation:7} : max fitness = {max(fitnesses):6.2f}, mean fitness = {fitnesses.mean().item():6.2f}"
+        )
+
     return fitnesses
 
 
 @torch.no_grad()
-def selection(fitnesses, num_select, method='rank', p=0.95):
-    if method not in ['rank', 'wheel', 'stochastic']:
-        raise NotImplementedError(f'{method} method is not implemented')
+def selection(fitnesses, num_select, method="rank", p=0.95):
+    if method not in ["rank", "wheel", "stochastic"]:
+        raise NotImplementedError(f"{method} method is not implemented")
 
-    if method == 'stochastic':
+    if method == "stochastic":
         if random() < p:
-            method = 'rank'
+            method = "rank"
         else:
-            method = 'wheel'
-    
-    if method == 'rank':
+            method = "wheel"
+
+    if method == "rank":
         values, indices = torch.topk(fitnesses, num_select)
         return indices
-    elif method == 'wheel':
-        sorted_norm_fitnesses = sorted(torch.nn.functional.normalize(fitnesses, dim=0, p=1), reverse=True)
+    elif method == "wheel":
+        sorted_norm_fitnesses = sorted(
+            torch.nn.functional.normalize(fitnesses, dim=0, p=1), reverse=True
+        )
 
         indices = []
         for k in range(num_select):
-            p, q, i = random(), 0., 0
+            p, q, i = random(), 0.0, 0
             while q < p:
                 q += sorted_norm_fitnesses[i]
                 i += 1
@@ -84,13 +90,19 @@ def selection(fitnesses, num_select, method='rank', p=0.95):
 @torch.no_grad()
 def crossover(model1, model2, alpha=0.5):
     model = Model()
-    model.weight = [alpha * model1.weight[i] + (1 - alpha) * model2.weight[i] for i in range(len(model1.linear_layers))]
+    model.weight = [
+        alpha * model1.weight[i] + (1 - alpha) * model2.weight[i]
+        for i in range(len(model1.linear_layers))
+    ]
     return model
 
 
 @torch.no_grad()
 def mutation(model, p=0.01):
     weights = model.weight
-    mutated_weight = [(torch.rand_like(weights[i]) < p) * 0.2 * torch.rand_like(weights[i]) - 0.1 for i in range(len(weights))]
+    mutated_weight = [
+        (torch.rand_like(weights[i]) < p) * 0.2 * torch.rand_like(weights[i]) - 0.1
+        for i in range(len(weights))
+    ]
 
     model.weight = [weights[i] + mutated_weight[i] for i in range(len(weights))]
