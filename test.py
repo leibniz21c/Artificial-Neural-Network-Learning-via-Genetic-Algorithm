@@ -16,5 +16,5 @@ if __name__ == "__main__":
 
     for _ in range(500):
         action = torch.argmax(model(torch.FloatTensor(obs))).item()
-        env.step(action)
+        obs, _, _, _ = env.step(action)
         env.render()
