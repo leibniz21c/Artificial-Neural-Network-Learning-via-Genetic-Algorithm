@@ -1,10 +1,10 @@
 # Artificial Neural Network Learning via Genetic Algorithm
 
-# Overview
+## Overview
 
 This project simulates learning a neural network using a genetic algorithm rather than the conventional error backpropagation method. Experiment with this using the Cart Pole provided by the [open-ai gym library](https://github.com/openai/gym). We confirmed that simple fully connected networks evolve well enough in the environment of tournament selection, 1000 individuals per population, and 0.05 mutation probability. 
 
-# Installation
+## Installation
 
 ```
 $ git clone https://github.com/leibniz21c/Artificial-Neural-Network-Learning-via-Genetic-Algorithm
@@ -12,7 +12,7 @@ $ cd Artificial-Neural-Network-Learning-via-Genetic-Algorithm/
 $ pip install -r requirements.txt
 ```
 
-# Training
+## Training
 
 ``` 
 $ python train.py [OPTIONS]
@@ -28,7 +28,7 @@ $ python train.py [OPTIONS]
 
 > ```tournament``` use every candidates.
 
-# Test
+## Test
 
 ``` 
 $ python test.py [SAVED_MODEL_PATH]
@@ -36,27 +36,27 @@ $ python test.py [SAVED_MODEL_PATH]
 
 > Default trained models are in ```saved/```
 
-# Simulations
+## Simulations
 
-### 1. Best Model in Generation 1
+#### 1. Best Model in Generation 1
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/38760913/198166136-50c7c448-aae0-4d7a-b510-0168dcd1c76f.gif">
 </p>
 
-### 2. Best Model in Generation 10
+#### 2. Best Model in Generation 10
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/38760913/198166171-3a825758-0520-4a3c-9945-a6d07372b63e.gif">
 </p>
 
-### 3. Best Model in Generation 100
+#### 3. Best Model in Generation 100
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/38760913/198166192-2094ff85-e88c-4153-9670-8feecac4245f.gif">
 </p>
 
-### 4. Best Model
+#### 4. Best Model
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/38760913/198166227-9e047232-a6ed-48ee-9068-892ee6c140ac.gif">
