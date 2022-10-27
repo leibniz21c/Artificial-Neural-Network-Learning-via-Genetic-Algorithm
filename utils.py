@@ -58,18 +58,18 @@ def simulation(models, generation=None, n_valid=5, logger=None):
 
 
 @torch.no_grad()
-def selection(fitnesses, num_select, method="rank", p=0.95):
-    if method not in ["rank", "wheel", "stochastic"]:
+def selection(fitnesses, num_select, method="tournament", p=0.95):
+    if method not in ["tournament", "wheel", "stochastic"]:
         raise NotImplementedError(f"{method} method is not implemented")
 
     if method == "stochastic":
         if random() < p:
-            method = "rank"
+            method = "tournament"
         else:
             method = "wheel"
 
-    if method == "rank":
-        values, indices = torch.topk(fitnesses, num_select)
+    if method == "tournament":
+        _, indices = torch.topk(fitnesses, num_select)
         return indices
     elif method == "wheel":
         sorted_norm_fitnesses = sorted(

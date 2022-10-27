@@ -105,6 +105,6 @@ if __name__ == "__main__":
     parser.add_argument("--num_populations", type=int, default=10)
     parser.add_argument("--p_mutation", type=float, default=0.05)
     parser.add_argument("--max_generations", type=int, default=10)
-    parser.add_argument("--selection_method", type=str, default="rank")
+    parser.add_argument("--selection_method", type=str, default="tournament")
     parser.add_argument("--num_validations", type=int, default=1)
     main(parser.parse_args())
