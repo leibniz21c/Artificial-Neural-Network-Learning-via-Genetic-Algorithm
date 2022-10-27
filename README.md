@@ -18,13 +18,13 @@ $ pip install -r requirements.txt
 $ python train.py [OPTIONS]
 ```
 
-|Argument|Type|Default|Description|
-|---|---|---|
-|```--num_populations```| ```int```| 10 |Number of individuals per population |
-|```--p_mutation```| ```float```| 0.05|Probability of mutation for each individual |
-|```--max_generations```| ```int```| 10|Max iteration |
-|```--selection_method```| ```str```| tournament|Selection method. (Available : ```wheel```, ```tournament```) |
-|```--num_validations```| ```int```| 1|Number of simulations per individual|
+|Argument                |Type       |Default         |Description                                                   |
+|------------------------|-----------|----------------|--------------------------------------------------------------|
+|```--num_populations``` |```int```  |10              |Number of individuals per population                          |
+|```--p_mutation```      |```float```|0.05            |Probability of mutation for each individual                   |
+|```--max_generations``` |```int```  |10              |Max iteration                                                 |
+|```--selection_method```|```str```  |```tournament```|Selection method. (Available : ```wheel```, ```tournament```) |
+|```--num_validations``` |```int```  |1               |Number of simulations per individual                          |
 
 > ```tournament``` use every candidates.
 
