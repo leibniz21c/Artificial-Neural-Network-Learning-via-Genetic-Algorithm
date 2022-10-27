@@ -40,9 +40,24 @@ $ python test.py [SAVED_MODEL_PATH]
 
 ### 1. Best Model in Generation 1
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/38760913/198166136-50c7c448-aae0-4d7a-b510-0168dcd1c76f.gif">
+</p>
+
 ### 2. Best Model in Generation 10
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/38760913/198166171-3a825758-0520-4a3c-9945-a6d07372b63e.gif">
+</p>
 
 ### 3. Best Model in Generation 100
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/38760913/198166192-2094ff85-e88c-4153-9670-8feecac4245f.gif">
+</p>
+
 ### 4. Best Model
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/38760913/198166227-9e047232-a6ed-48ee-9068-892ee6c140ac.gif">
+</p>
